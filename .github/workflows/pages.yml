@@ -30,11 +30,19 @@ jobs:
           node-version: "22"
       - name: Build the demo
         run: npm run build:demo
-      # enablement: true creates the Pages site on first run, so publishing
-      # does not depend on someone having flipped the repo setting by hand.
+      - name: Fail if committed docs/ is stale
+        run: |
+          if ! git diff --quiet -- docs; then
+            echo "::error::docs/ is out of date. Run 'npm run build:demo' and commit the result."
+            git diff --stat -- docs
+            exit 1
+          fi
+      # NOTE: `enablement: true` does not work here — the workflow token gets
+      # "Resource not accessible by integration" on create-a-pages-site. The
+      # Pages site has to be created once by a repo admin:
+      #   Settings → Pages → Source: GitHub Actions
+      # After that this step succeeds and every push publishes.
       - uses: actions/configure-pages@v5
-        with:
-          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs

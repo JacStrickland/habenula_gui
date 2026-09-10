@@ -8,6 +8,12 @@ audit log, the kill switch, and engine lifecycle.
 **[▶ Try the demo](https://jacstrickland.github.io/habenula_gui/)** — the same
 app running on fixture data.
 
+> **First-time setup:** the demo publishes from GitHub Actions, and the Pages
+> site has to be created once by hand — a workflow token cannot do it
+> (`Resource not accessible by integration`). Go to **Settings → Pages →
+> Source: GitHub Actions**, then re-run the latest workflow. Every push to
+> `main` publishes after that.
+
 ---
 
 ## Two ways to run it, one codebase
