@@ -30,7 +30,11 @@ jobs:
           node-version: "22"
       - name: Build the demo
         run: npm run build:demo
+      # enablement: true creates the Pages site on first run, so publishing
+      # does not depend on someone having flipped the repo setting by hand.
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: docs
