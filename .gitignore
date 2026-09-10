@@ -1,0 +1,4 @@
+node_modules/
+*.log
+# docs/ is the built demo and IS committed — GitHub Pages serves it from the
+# repository. Rebuild with `npm run build:demo` after changing public/.

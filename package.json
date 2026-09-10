@@ -1,0 +1,13 @@
+{
+  "name": "habenula-gui",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "A local web GUI for the Habenula engine, plus a hosted demo of the same code.",
+  "scripts": {
+    "start": "node server.mjs",
+    "build:demo": "node scripts/build-demo.mjs",
+    "serve:demo": "node scripts/build-demo.mjs && node --eval \"import('node:http').then(async({createServer})=>{const{readFile}=await import('node:fs/promises');const{join,extname}=await import('node:path');const M={'.html':'text/html','.js':'text/javascript','.css':'text/css'};createServer(async(q,s)=>{const p=q.url==='/'?'/index.html':q.url.split('?')[0];try{s.writeHead(200,{'content-type':(M[extname(p)]||'text/plain')+'; charset=utf-8'});s.end(await readFile(join('docs',p)))}catch{s.writeHead(404).end('not found')}}).listen(7677,'127.0.0.1',()=>console.log('demo → http://127.0.0.1:7677'))})\""
+  },
+  "engines": { "node": ">=22.22.1" }
+}
